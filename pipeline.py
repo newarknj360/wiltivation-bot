@@ -40,14 +40,15 @@ def wait_until_public(urls, timeout=90):
             raise TimeoutError(f"{url} never became reachable in {timeout}s")
 
 def build_caption(slides, tag):
+    # Wiltivation hard rule: max 5 hashtags per post. 1 fixed brand tag + 4 theme tags.
     tag_hashtags = {
         "solitude":   "#solitude #alonetime #innerwork #stillness",
-        "discipline": "#discipline #disciplineequalsfreedom #consistency",
+        "discipline": "#discipline #disciplineequalsfreedom #consistency #growthmindset",
         "rebuilding": "#rebuild #comeback #startover #newchapter",
         "stoic":      "#stoicism #stoic #selfmastery #mindset",
-        "resilience": "#resilience #mentaltoughness #growth",
+        "resilience": "#resilience #mentaltoughness #growth #innerstrength",
     }
-    base = "#motivation #selfimprovement #mindset #wiltivation"
+    base = "#wiltivation"
     extra = tag_hashtags.get(tag, "")
     return f"{slides[0]}\n\n{base} {extra}".strip()
 
