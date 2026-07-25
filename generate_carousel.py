@@ -108,17 +108,21 @@ def make_cta_slide(headline="Solitude builds what\ncrowds destroy.", sub="Follow
     return img
 
 def build_carousel(slides_text, tag, out_dir, slug):
+    # Instagram's Content Publishing API only officially supports JPEG for
+    # photo/carousel items -- PNG uploads "succeed" at the raw-file level but
+    # get rejected by Instagram's media fetcher with a vague "doesn't meet our
+    # requirements" error. Always save as .jpg (RGB, no alpha) for this reason.
     os.makedirs(out_dir, exist_ok=True)
     paths = []
     total = len(slides_text) + 1  # + CTA slide
     for i, q in enumerate(slides_text, start=1):
         img = make_quote_slide(q, i, total, tag=tag)
-        p = f"{out_dir}/{slug}_{i:02d}.png"
-        img.save(p)
+        p = f"{out_dir}/{slug}_{i:02d}.jpg"
+        img.convert("RGB").save(p, "JPEG", quality=92)
         paths.append(p)
     cta = make_cta_slide()
-    p = f"{out_dir}/{slug}_{total:02d}.png"
-    cta.save(p)
+    p = f"{out_dir}/{slug}_{total:02d}.jpg"
+    cta.convert("RGB").save(p, "JPEG", quality=92)
     paths.append(p)
     return paths
 
