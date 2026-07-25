@@ -9,7 +9,7 @@ product -> generate long-lived token for the Page connected to @wiltivation.
 """
 import requests, time, os
 
-GRAPH = "https://graph.facebook.com/v19.0"
+GRAPH = "https://graph.instagram.com/v19.0"  # Instagram API with Instagram Login (this app's actual setup) -- NOT graph.facebook.com
 IG_USER_ID = os.environ["IG_USER_ID"]          # your IG business account id
 ACCESS_TOKEN = os.environ["IG_ACCESS_TOKEN"]   # long-lived page token
 
